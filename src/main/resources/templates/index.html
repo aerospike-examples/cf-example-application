@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Aerospike CF Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+</head>
+<body>
+	<div class="container">
+		<br/>
+		<div class="jumbotron">
+	    	    <h1>Aerospike Cloud Foundry Demo Application</h1>
+			<p>A <a href="http://github.com/aerospike/cf-example-application">Spring application</a> 
+			   that demonstrates using two services (aerospike-cache and aerospike-session) which are 
+			   injected into the application using Cloud Foundry</p>
+		</div>
+		<h2>Cloud Services</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Service Name</th>
+					<th>Connection Information</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="service : ${services}">
+					<td><strong th:text="${service.key}"></strong></td>
+		    			<td th:text="${service.value}" />
+		    		</tr>
+	    		</tbody>
+	    </table>
+	    
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	</div>    
+</body>
+</html>
