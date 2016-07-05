@@ -26,11 +26,11 @@ repositories {
 	jcenter()
 }
 
-
 dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
+	compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 	compile group:'io.pivotal.labs', name:'cf-env', version:'0.0.1'
 	
 	compile 'com.aerospike:aerospike-client:3.2.2'
