@@ -23,6 +23,7 @@ CD to the build/libs directory and run ```cf push myapp -p ./cf-example-app-X.X.
 ### Configure
 
 To bind the application to the services:
+
 1. Use ```cf services``` to ensure the ```aerospike-cache``` and ```aerospike-session``` services have already been created. If not, use ```cf create-service``` to create them.
 2. Bind the application to the services using ```cf bind-service myapp aerospike-cache``` and ```cf bind-service myapp aerospike-session```.
 3. Use ```cf restage myapp``` in order to restage the app and pick up the service credentials
