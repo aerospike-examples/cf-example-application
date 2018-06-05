@@ -16,17 +16,19 @@
  */
 package com.aerospike.example.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.config.java.AbstractCloudConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
 import io.pivotal.labs.cfenv.CloudFoundryEnvironment;
 import io.pivotal.labs.cfenv.CloudFoundryEnvironmentException;
 
 @Configuration
 @Profile("cloud")
 public class AppConfiguration extends AbstractCloudConfig {
+	private static final Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
 	private static final String CACHE_SERVICE_NAME = "aerospike-cache";
 	private static final String SESSION_SERVICE_NAME = "aerospike-session";
 	
@@ -34,8 +36,11 @@ public class AppConfiguration extends AbstractCloudConfig {
     private AerospikeServiceConfiguration sessionService = null;
     
 	public AppConfiguration() throws CloudFoundryEnvironmentException {  
+		getAerospikeServices();
 		CloudFoundryEnvironment environment = new CloudFoundryEnvironment(System::getenv);
-        
+		logger.error("In the AppConfigConstructor");
+		System.out.println("In the app configuration");
+		logger.error(environment.getServiceNames().toString());
         if (environment.getServiceNames().contains(CACHE_SERVICE_NAME)) {
 			this.cacheService = new AerospikeServiceConfiguration(
 					CACHE_SERVICE_NAME, 
@@ -57,5 +62,9 @@ public class AppConfiguration extends AbstractCloudConfig {
 	@Bean(name="sessionService")
 	public AerospikeServiceConfiguration sessionService() {
 		return this.sessionService;
+	}
+
+	private void getAerospikeServices() {
+		logger.info(System.getenv("VCAP_SERVICES"));
 	}
 }
